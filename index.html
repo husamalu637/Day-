@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -20,27 +19,21 @@
             background-color: var(--bg);
             color: var(--text);
             font-family: 'Cairo', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin: 0; padding: 0;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         header {
             width: 100%;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 40px 0;
-            text-align: center;
+            padding: 40px 0; text-align: center;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
         header h1 { margin: 0; font-size: 2.2rem; font-weight: 900; }
 
         .main-container {
-            max-width: 900px;
-            width: 95%;
-            margin: 30px auto;
+            max-width: 900px; width: 95%; margin: 30px auto;
         }
 
         .video-wrapper {
@@ -63,11 +56,11 @@
 
         .responsive-iframe iframe {
             position: absolute;
-            /* تم تعديل الإزاحة إلى 160px لضبط موقع الفيديو بدقة */
-            top: -160px; 
+            /* تم إنزال الفيديو أكثر (155 بدل 170) */
+            top: -155px; 
             left: 0;
             width: 100%;
-            height: calc(100% + 160px); 
+            height: calc(100% + 155px); 
             border: 0;
         }
 
@@ -99,12 +92,7 @@
         }
 
         .ep-btn:hover { background: var(--primary); color: #000; }
-
-        .ep-btn.active {
-            background: var(--accent);
-            color: #000;
-            border-color: var(--accent);
-        }
+        .ep-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
 
         footer { margin: 40px 0; opacity: 0.5; font-size: 0.8rem; }
     </style>
@@ -117,18 +105,16 @@
 </header>
 
 <div class="main-container">
-    
     <div id="videoContainer" class="video-wrapper">
         <div class="responsive-iframe">
-            <iframe id="mainIframe" src="" frameborder="0" allowfullscreen="" scrolling="no"></iframe>
+            <iframe id="mainIframe" src="" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
         </div>
-        <div id="epTitle" class="video-footer"></div>
+        <div id="epTitle" class="video-footer">اختر حلقة للبدء</div>
     </div>
 
     <div class="episodes-container" style="background: var(--card); padding: 25px; border-radius: 20px;">
         <div class="episodes-grid" id="buttonsGrid"></div>
     </div>
-
 </div>
 
 <footer>
@@ -136,24 +122,13 @@
 </footer>
 
 <script>
-    const episodeLinks = [
-        "https://cartoony.net/watch/317/4528", "https://cartoony.net/watch/317/4529", "https://cartoony.net/watch/317/4530",
-        "https://cartoony.net/watch/317/4531", "https://cartoony.net/watch/317/4532", "https://cartoony.net/watch/317/4533",
-        "https://cartoony.net/watch/317/4534", "https://cartoony.net/watch/317/4535", "https://cartoony.net/watch/317/4536",
-        "https://cartoony.net/watch/317/4537", "https://cartoony.net/watch/317/4538", "https://cartoony.net/watch/317/4539",
-        "https://cartoony.net/watch/317/4540", "https://cartoony.net/watch/317/4541", "https://cartoony.net/watch/317/4542",
-        "https://cartoony.net/watch/317/4543", "https://cartoony.net/watch/317/4544", "https://cartoony.net/watch/317/4545",
-        "https://cartoony.net/watch/317/4546", "https://cartoony.net/watch/317/4547", "https://cartoony.net/watch/317/4548",
-        "https://cartoony.net/watch/317/4549", "https://cartoony.net/watch/317/4550", "https://cartoony.net/watch/317/4551",
-        "https://cartoony.net/watch/317/4552", "https://cartoony.net/watch/317/4553", "https://cartoony.net/watch/317/4554",
-        "https://cartoony.net/watch/317/4555", "https://cartoony.net/watch/317/4556", "https://cartoony.net/watch/317/4557",
-        "https://cartoony.net/watch/317/4558", "https://cartoony.net/watch/317/4559", "https://cartoony.net/watch/317/4560",
-        "https://cartoony.net/watch/317/4561", "https://cartoony.net/watch/317/4562", "https://cartoony.net/watch/317/4563",
-        "https://cartoony.net/watch/317/4564", "https://cartoony.net/watch/317/4565", "https://cartoony.net/watch/317/4566",
-        "https://cartoony.net/watch/317/4567", "https://cartoony.net/watch/317/4568", "https://cartoony.net/watch/317/4569",
-        "https://cartoony.net/watch/317/4570", "https://cartoony.net/watch/317/4571", "https://cartoony.net/watch/317/4572",
-        "https://cartoony.net/watch/317/4573"
-    ];
+    const baseId = 4528;
+    const totalEpisodes = 46; 
+    const episodeLinks = [];
+
+    for (let i = 0; i < totalEpisodes; i++) {
+        episodeLinks.push(`https://cartoony.net/watch/317/${baseId + i}`);
+    }
 
     const grid = document.getElementById('buttonsGrid');
     const container = document.getElementById('videoContainer');
@@ -168,7 +143,7 @@
             window.open('https://www.profitablecpmratenetwork.com/e41dj2h87?key=bef514b5ca3fa945e7a3b60e4a9ef21a', '_blank');
             container.style.display = 'block';
             iframe.src = link;
-            titleDisp.innerText = "أنت تشاهد الآن: الحلقة " + (index + 1);
+            titleDisp.innerText = "أنت تشاهد الآن: داي الشجاع - حلقة " + (index + 1);
             document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             container.scrollIntoView({ behavior: 'smooth', block: 'start' });
